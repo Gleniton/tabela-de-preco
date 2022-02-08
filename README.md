@@ -1,5 +1,5 @@
 # tabeladepreco
-Projeto para cálculo de financiamento usando tabela PRICE ou SAC
+Calculadora simples de financiamento usando tabela PRICE ou SAC
 
 # Installation and Usage
 ```
