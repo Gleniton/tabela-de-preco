@@ -1,0 +1,183 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Financiamento",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:{port}",
+            "description": "",
+            "variables": {
+                "port": {
+                    "default": "3000"
+                }
+            }
+        },
+        {
+            "url": "http://{domain}",
+            "description": "",
+            "variables": {
+                "domain": {
+                    "default": "localhost"
+                }
+            }
+        },
+        {
+            "url": "http://localhost:3000",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/financiamento/calcular": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/calcularFinanciamento"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Financiamento"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/calcularFinanciamentoResponse"
+                                }
+                            }
+                        },
+                        "description": "Sucesso"
+                    },
+                    "500": {
+                        "description": "Falha interna"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestError"
+                                }
+                            }
+                        },
+                        "description": "Erro de validação"
+                    }
+                },
+                "operationId": "calcularFinanciamento",
+                "summary": "Calcula financiamento com base numa tabela de preço"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "calcularFinanciamento": {
+                "title": "Root Type for calcularFinanciamento",
+                "description": "",
+                "required": [
+                    "tabela",
+                    "entrada",
+                    "meses",
+                    "juros",
+                    "valor"
+                ],
+                "type": "object",
+                "properties": {
+                    "tabela": {
+                        "description": "Tipo de financiamento",
+                        "enum": [
+                            "PRICE",
+                            "SAC"
+                        ],
+                        "type": "string"
+                    },
+                    "meses": {
+                        "format": "int32",
+                        "description": "Numero de meses do financiamento",
+                        "maximum": 360,
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "entrada": {
+                        "description": "Valor da entrada",
+                        "type": "number"
+                    },
+                    "juros": {
+                        "description": "Juros ao mês",
+                        "type": "number"
+                    },
+                    "valor": {
+                        "description": "Valor do financiamento",
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "tabela": "PRICE",
+                    "valor": 150000,
+                    "meses": 30,
+                    "entrada": 15000.25,
+                    "juros": 0.1423
+                }
+            },
+            "BadRequestError": {
+                "title": "Root Type for BadRequestError",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "example": {
+                    "errors": [
+                        "Valores permitidos para tabela são PRICE e SAC"
+                    ]
+                }
+            },
+            "calcularFinanciamentoResponse": {
+                "title": "Root Type for calcularFinanciamentoResponse",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "parcelas": {
+                        "type": "array",
+                        "items": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                },
+                "example": {
+                    "parcelas": [
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4,
+                        2750.4
+                    ]
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Financiamento",
+            "description": ""
+        }
+    ]
+}

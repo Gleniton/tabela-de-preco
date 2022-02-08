@@ -1,0 +1,29 @@
+{
+  "name": "tabeladepreco",
+  "version": "1.0.0",
+  "description": "Projeto para cálculo de financiamento",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "debug": "nodemon --inspect index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gleniton/tabeladepreco.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gleniton/tabeladepreco/issues"
+  },
+  "homepage": "https://github.com/Gleniton/tabeladepreco#readme",
+  "dependencies": {
+    "debug": "^4.3.3",
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "swagger-ui-express": "^4.3.0"
+  }
+}
